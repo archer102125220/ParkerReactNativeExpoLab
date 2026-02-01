@@ -62,3 +62,9 @@ This project includes AI coding rules adapted from `pos-switch-ai-agent`.
   - The original AI rules contained `next-intl` specific configurations which were removed as they are not compatible with this React Native project.
   - **Status**: AI rules for i18n (e.g., using `i18next` or `expo-localization`) have **NOT** yet been added.
   - Please configure i18n manually or provide specific instructions for the preferred library before asking AI to work on translation tasks.
+
+## 📘 Developer Guide
+
+For a detailed breakdown of how AI rules map to different models and general development guidelines for humans, please read:
+
+👉 [**Development Rules & AI Configuration Guide**](docs/development_rules.md)

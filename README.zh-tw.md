@@ -62,3 +62,9 @@
   - 原始 AI 規則包含 `next-intl` 特定設定，因與此 React Native 專案不相容已被移除。
   - **狀態**：尚未新增 i18n 相關的 AI 規則（例如使用 `i18next` 或 `expo-localization`）。
   - 在要求 AI 執行翻譯任務之前，請手動設定 i18n 或提供偏好函式庫的具體說明。
+
+## 📘 開發者指南
+
+關於 AI 規則如何對應到不同模型，以及給人類開發者的通用開發準則，請閱讀：
+
+👉 [**Development Rules & AI Configuration Guide**](docs/development_rules.zh-tw.md)
