@@ -5,11 +5,16 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
+    "prebuild": "expo prebuild",
+    "run:ios": "expo run:ios",
+    "run:android": "node scripts/check-java.js && expo run:android",
+    "android": "expo run:android",
     "ios:localhost": "expo start --localhost --ios",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "sdk:env": "sdk env",
+    "sdk:env:install": "sdk env install"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -28,6 +33,7 @@
     "expo-symbols": "~1.0.8",
     "expo-system-ui": "~6.0.9",
     "expo-web-browser": "~15.0.10",
+    "native-alert": "file:./modules/native-alert",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",

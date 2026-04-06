@@ -1,0 +1,8 @@
+{
+  "name": "native-alert",
+  "version": "0.0.1",
+  "description": "Local native module demo — NativeAlert（UIAlertController / AlertDialog）",
+  "main": "index",
+  "types": "index",
+  "private": true
+}

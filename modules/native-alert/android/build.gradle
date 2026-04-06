@@ -1,0 +1,37 @@
+// Android Expo Local Module 的 Gradle 建構設定
+//
+// ⚠️ 注意：這個 local module 不使用 expo-module-gradle-plugin，
+// 因為該 plugin 在子專案 context 中會嘗試讀取 gradle.ext.expoAutolinkingManager，
+// 而子專案啟動時該值尚未設定，導致 "Autolinking is not set up in settings.gradle" 的錯誤。
+//
+// 正確做法：直接定義 Android library 並手動依賴 expo-modules-core，
+// Expo autolinking 會負責把這個模組的類別注冊到 ExpoModulesPackageList。
+
+plugins {
+  id 'com.android.library'
+  id 'org.jetbrains.kotlin.android'
+}
+
+android {
+  namespace "expo.modules.nativealert"
+  compileSdk 36
+
+  defaultConfig {
+    minSdk 24
+    targetSdk 36
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  kotlinOptions {
+    jvmTarget = '17'
+  }
+}
+
+dependencies {
+  // Expo Modules Core：提供 Module、ModuleDefinition、AsyncFunction 等 API
+  implementation project(':expo-modules-core')
+}

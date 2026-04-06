@@ -1,0 +1,10 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "podspecDir": "ios",
+    "modules": ["NativeAlertModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.nativealert.NativeAlertModule"]
+  }
+}

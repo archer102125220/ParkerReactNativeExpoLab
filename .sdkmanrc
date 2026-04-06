@@ -1,0 +1,4 @@
+# SDKMAN 專案版本設定
+# 執行 `sdk env` 切換到此版本，`sdk env install` 若版本未安裝則自動下載
+# 文件：https://sdkman.io/usage#env
+java=21.0.7-tem

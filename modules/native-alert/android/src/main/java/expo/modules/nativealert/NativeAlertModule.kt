@@ -1,7 +1,8 @@
 package expo.modules.nativealert
 
 import android.app.AlertDialog
-import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import expo.modules.kotlin.Promise
@@ -11,6 +12,10 @@ import expo.modules.kotlin.Promise
 /**
  * 原生 Alert 模組（Android 實作）
  * 使用 AlertDialog 呈現系統原生 Alert
+ *
+ * 注意：這個 local module 不使用 expo-module-gradle-plugin，
+ * 所以無法使用 appContext.mainQueue.launch{}（需要 kotlinx.coroutines）。
+ * 改用 Handler(Looper.getMainLooper()).post{} 達到相同的 Main Thread 切換效果。
  */
 class NativeAlertModule : Module() {
 
@@ -21,20 +26,15 @@ class NativeAlertModule : Module() {
 
     // 定義 JS 可呼叫的 async function
     AsyncFunction("showAlert") { title: String, message: String?, buttons: List<Map<String, String>>?, promise: Promise ->
-      val context: Context = appContext.reactContext
-        ?: run {
-          promise.reject("NO_CONTEXT", "找不到 Android Context", null)
-          return@AsyncFunction
-        }
+      val activity = appContext.currentActivity
+      if (activity === null) {
+        promise.reject("NO_ACTIVITY", "找不到目前的 Activity", null)
+        return@AsyncFunction
+      }
 
       // 所有 UI 操作必須在 Main Thread 執行
-      appContext.mainQueue.launch {
-        val activity = appContext.currentActivity
-          ?: run {
-            promise.reject("NO_ACTIVITY", "找不到目前的 Activity", null)
-            return@launch
-          }
-
+      // 使用 Handler + Looper 取代 coroutines（不需要額外依賴）
+      Handler(Looper.getMainLooper()).post {
         val builder = AlertDialog.Builder(activity)
         builder.setTitle(title)
         if (!message.isNullOrEmpty()) {
